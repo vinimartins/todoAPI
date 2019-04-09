@@ -29,3 +29,10 @@ done (string, opcional) -> sim ou nao
 <h4>Para DELETAR um item:</h4>
 Método: DELETE<br/>
 <?php echo $url; ?>/<?php echo $data->todo[0]->id; ?><br/>
+<hr/>
+
+<h4>Para SINCRONIZAR os itens:</h4>
+Método: POST<br/>
+<?php echo $url; ?>/sync<br/>
+Parâmetros:<br/>
+json (string, obrigatório) -> uma string do json da lista

@@ -59,11 +59,12 @@ class Todo extends model {
 		}
 	}
 
-	public function add($item) {
-		$sql = "INSERT INTO todo (token, item) VALUES (:token, :item)";
+	public function add($item, $done='0') {
+		$sql = "INSERT INTO todo (token, item, done) VALUES (:token, :item, :done)";
 		$sql = $this->db->prepare($sql);
 		$sql->bindValue(":token", $this->token);
 		$sql->bindValue(":item", $item);
+		$sql->bindValue(":done", $done);
 		$sql->execute();
 		return $this->db->lastInsertId();
 	}
@@ -97,6 +98,13 @@ class Todo extends model {
 		$sql = $this->db->prepare($sql);
 		$sql->bindValue(":token", $this->token);
 		$sql->bindValue(":id", $id);
+		$sql->execute();
+	}
+
+	public function clear() {
+		$sql = "DELETE FROM todo WHERE token = :token";
+		$sql = $this->db->prepare($sql);
+		$sql->bindValue(":token", $this->token);
 		$sql->execute();
 	}
 

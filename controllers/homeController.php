@@ -75,6 +75,58 @@ class homeController extends controller {
 		$this->loadView('create', array('url'=>$url));
 	}
 
+	public function sync($token) {
+		if(empty($token)) {
+			exit;
+		}
+
+		$todo = new Todo($token);
+
+		if($todo->isOk() == false) {
+			exit;
+		}
+
+		$array = array('todo'=> array('status' => false));
+
+		$data = json_decode(file_get_contents('php://input'));
+		if(is_null($data)) {
+			$data = $_POST;
+			$data = json_decode(json_encode($data), FALSE);
+		}
+
+		if(!empty($data->json)) {
+			$items = json_decode($data->json);
+
+			if(is_array($items)) {
+				$todo->clear();
+
+				foreach($items as $item) {
+					$todo->add($item->item, $item->done);
+				}
+
+				$array = array('todo'=> array('status' => true));
+			}
+		}
+
+		header("Content-Type: application/json");
+		echo json_encode($array);
+	}
+
+
+
 	public function notfound() {}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -6,14 +6,14 @@ if(ENVIRONMENT == 'development') {
 	define("BASE_URL", "http://localhost/crud_api/");
 	$config['dbname'] = 'todoapi';
 	$config['host'] = 'localhost';
-	$config['dbuser'] = 'admin';
-	$config['dbpass'] = 'admin';
+	$config['dbuser'] = 'root';
+	$config['dbpass'] = 'root';
 } else {
 	define("BASE_URL", "http://localhost/crud_api/");
 	$config['dbname'] = 'todoapi';
 	$config['host'] = 'localhost';
-	$config['dbuser'] = 'admin';
-	$config['dbpass'] = 'admin';
+	$config['dbuser'] = 'root';
+	$config['dbpass'] = 'root';
 }
 
 global $db;
